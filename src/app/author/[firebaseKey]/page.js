@@ -3,19 +3,26 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { viewAuthorDetails } from '../../../api/mergedData';
+import { getAuthorBooks } from '../../../api/authorData';
+import BookCard from '../../../components/BookCard';
 
 export default function ViewAuthor({ params }) {
   const [authorDetails, setAuthorDetails] = useState({});
-
+  const [books, setBooks] = useState([]);
   // grab firebaseKey from url
   const { firebaseKey } = params;
+
+  const getSpecificBooks = () => {
+    getAuthorBooks(firebaseKey).then(setBooks);
+    console.log(getAuthorBooks);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  };
 
   // make call to API layer to get the data
   useEffect(() => {
     viewAuthorDetails(firebaseKey).then(setAuthorDetails);
+    getAuthorBooks(firebaseKey).then(setBooks);
   }, [firebaseKey]);
-
-  console.warn('LOOOOK', authorDetails);
 
   return (
     <div className="mt-5 d-flex flex-wrap">
@@ -26,7 +33,16 @@ export default function ViewAuthor({ params }) {
         </h5>
         Author Email: <a href={`mailto:${authorDetails.email}`}>{authorDetails.email}</a>
         <p>{authorDetails.description || ''}</p>
+        <button type="button" className="btn btn-success">
+          EDIT
+        </button>
+        <button type="button" className="btn btn-danger">
+          DELETE
+        </button>
         <hr />
+        {books.map((book) => (
+          <BookCard key={book.firebaseKey} bookObj={book} onUpdate={getSpecificBooks} />
+        ))}
       </div>
     </div>
   );
