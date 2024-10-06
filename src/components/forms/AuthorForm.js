@@ -7,7 +7,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { createAuthor, getAuthors, updateAuthor } from '../../api/authorData';
+import { createAuthor, updateAuthor } from '../../api/authorData';
 
 const initialState = {
   email: '',
@@ -19,15 +19,10 @@ const initialState = {
 
 function AuthorForm({ obj = initialState }) {
   const [formInput, setFormInput] = useState(obj);
-  const [authors, setAuthors] = useState([]); // Do we need this?
   const router = useRouter();
   const { user } = useAuth();
 
-  console.warn(authors); // debugging. Do we need this useState?
-
   useEffect(() => {
-    getAuthors(user.uid).then(setAuthors);
-
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
 
@@ -71,6 +66,11 @@ function AuthorForm({ obj = initialState }) {
       {/* EMAIL INPUT  */}
       <FloatingLabel controlId="floatingInput3" label="Email Address" className="mb-3">
         <Form.Control type="email" placeholder="Email Address" name="email" value={formInput.email} onChange={handleChange} required />
+      </FloatingLabel>
+
+      {/* IMAGE INPUT  */}
+      <FloatingLabel controlId="floatingInput2" label="Author Image" className="mb-3">
+        <Form.Control type="url" placeholder="Enter an image url" name="image" value={formInput.image} onChange={handleChange} required />
       </FloatingLabel>
 
       {/* A WAY TO HANDLE UPDATES FOR TOGGLES, RADIOS, ETC  */}
