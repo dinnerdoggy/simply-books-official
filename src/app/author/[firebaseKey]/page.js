@@ -33,12 +33,6 @@ export default function ViewAuthor({ params }) {
         </h5>
         Author Email: <a href={`mailto:${authorDetails.email}`}>{authorDetails.email}</a>
         <p>{authorDetails.description || ''}</p>
-        <button type="button" className="btn btn-success">
-          EDIT
-        </button>
-        <button type="button" className="btn btn-danger">
-          DELETE
-        </button>
         <hr />
         {books.map((book) => (
           <BookCard key={book.firebaseKey} bookObj={book} onUpdate={getSpecificBooks} />
