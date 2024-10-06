@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Card } from 'react-bootstrap';
 import { viewAuthorDetails } from '../../../api/mergedData';
 import { getAuthorBooks } from '../../../api/authorData';
 import BookCard from '../../../components/BookCard';
@@ -11,12 +12,6 @@ export default function ViewAuthor({ params }) {
   const [books, setBooks] = useState([]);
   // grab firebaseKey from url
   const { firebaseKey } = params;
-
-  const getSpecificBooks = () => {
-    getAuthorBooks(firebaseKey).then(setBooks);
-    console.log(getAuthorBooks);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  };
 
   // make call to API layer to get the data
   useEffect(() => {
@@ -31,11 +26,13 @@ export default function ViewAuthor({ params }) {
           {authorDetails.first_name} {authorDetails.last_name}
           {authorDetails.favorite ? '🤍' : ''}
         </h5>
+        <Card.Img variant="top" src={authorDetails.image} alt="Image of the author" style={{ height: '300px', width: '300px' }} />
+        <hr />
         Author Email: <a href={`mailto:${authorDetails.email}`}>{authorDetails.email}</a>
         <p>{authorDetails.description || ''}</p>
         <hr />
         {books.map((book) => (
-          <BookCard key={book.firebaseKey} bookObj={book} onUpdate={getSpecificBooks} />
+          <BookCard key={book.firebaseKey} bookObj={book} onUpdate={getAuthorBooks} />
         ))}
       </div>
     </div>

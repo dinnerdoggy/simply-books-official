@@ -6,18 +6,22 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
 import { deleteSingleAuthor } from '../api/authorData';
+import { deleteAuthorBooks } from '../api/mergedData';
 
 function AuthorCard({ authorObj, onUpdate }) {
   // FOR DELETE, WE NEED TO REMOVE THE AUTHOR AND HAVE THE VIEW RERENDER,
   // SO WE PASS THE FUNCTION FROM THE PARENT THAT GETS THE BOOKS
   const deleteThisAuthor = () => {
     if (window.confirm(`Delete ${authorObj.first_name} ${authorObj.last_name}?`)) {
-      deleteSingleAuthor(authorObj.firebaseKey).then(() => onUpdate());
+      deleteSingleAuthor(authorObj.firebaseKey)
+        .then(deleteAuthorBooks(authorObj.firebaseKey))
+        .then(() => onUpdate());
     }
   };
 
   return (
     <Card style={{ width: '18rem', margin: '10px' }}>
+      <Card.Img variant="top" src={authorObj.image} alt="Image of the Author" style={{ height: '286px', width: '286px' }} />
       <Card.Body>
         <Card.Title>
           {authorObj.first_name} {authorObj.last_name}
