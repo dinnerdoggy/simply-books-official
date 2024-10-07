@@ -3,7 +3,7 @@
 
 This is an Amazon.com clone
 
-[View App](#[your-link](https://caseys-simply-books.netlify.app/))
+[View App](https://caseys-simply-books.netlify.app/)
 
 ## About the User <!-- This is a scaled down user persona -->
 - The ideal user for this application is someone the reads a lot
@@ -19,11 +19,9 @@ This is an Amazon.com clone
 ## Video Walkthrough of Simply Books
 https://www.loom.com/share/f8fcc56dad204b0186e55cce0cc1e2aa?sid=821080d0-468c-403e-a30d-b193ffcd6a39
 
-## Relevant Links <!-- Link to all the things that are required outside of the ones that have their own section -->
-- [https://caseys-simply-books.netlify.app/](#your-link)
-
-## Project Screenshots <!-- These can be inside of your project. Look at the repos from class and see how the images are included in the readme -->
-<img width="1148" alt="Your Alt" src="your-link.png">![image](https://github.com/user-attachments/assets/700e8425-5036-4487-910a-b23e6bf7b137)
+## Project Screenshots
+<img width="1148" alt="" src="your-link.png">![image](https://github.com/user-attachments/assets/700e8425-5036-4487-910a-b23e6bf7b137)
+<img width="1148" alt="" src="your-link.png">![image](https://github.com/user-attachments/assets/4f4fbb1a-345f-462d-aeae-f3ca1acdec55)
 
 
 ## Contributors
